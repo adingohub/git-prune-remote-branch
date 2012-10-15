@@ -11,7 +11,7 @@ ignore_branches = ['production', 'web01', 'web02', 'pre', 'web01-pre', 'web02-pr
   next if branch =~ %r![^/]+/master!
   next if ignore_branches.include?(branch.gsub('origin/', ''))
 
-  if `git branch --contains #{branch}`.each_line.any? { |included| included.strip.chomp =~ /\A(master)\z/ }
+  if `git branch --contains #{branch}`.each_line.any? { |included| included.include?('master') }
     ref = branch.sub(%r!^([^/]+)/!, '')
     command = "git push --delete #{$1} #{ref}"
     puts command
