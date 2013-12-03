@@ -4,7 +4,10 @@ require 'optparse'
 opts = OptionParser.new
 opts.on('--noop', 'dry-run mode') { |v| $noop = true }
 opts.parse!
-ignore_branches = ['production', 'web01', 'web02', 'pre', 'web01-pre', 'web02-pre', 'dev', 'web01-dev', 'web02-dev', 'dep01', 'dep02', 'dep01-pre', 'dep01-dev']
+ignore_branches = ['production', 'web01', 'web02', 'pre', 'web01-pre', 'web02-pre', 'dev', 'web01-dev', 'web02-dev']
+ignore_branches.concat(['dep01', 'dep02', 'dep01-pre', 'dep01-dev'])
+ignore_branches.concat(['prd', 'dlv-dev', 'dlv-pre', 'dlv-prd'])
+ignore_branches.concat('aws-prd2', 'aws-prd3', 'aws-build', 'aws-dev')
 
 `git branch -r`.each_line do |branch|
   branch.strip!.chomp!
