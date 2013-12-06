@@ -4,8 +4,9 @@ require 'optparse'
 opts = OptionParser.new
 opts.on('--noop', 'dry-run mode') { |v| $noop = true }
 opts.parse!
-ignore_branches = ['add_branch_contents_cleaner']
+ignore_branches = ['t_functional_test']
 
+`git fetch --prune`
 `ls /xfs0/home/branch_contents`.each_line do |branch|
   branch.strip!.chomp!
   next if ignore_branches.include?(branch)
