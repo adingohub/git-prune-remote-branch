@@ -9,7 +9,7 @@ ignore_branches = ['add_branch_contents_cleaner']
 `ls /xfs0/home/branch_contents`.each_line do |branch|
   branch.strip!.chomp!
   next if ignore_branches.include?(branch)
-  command = "sudo rm -rf /xfs0/home/branch_contents/#{branch}"
+  command = "rm -rf /xfs0/home/branch_contents/#{branch}"
   if `git branch -r --merged`.include?(branch)
     puts command
     unless $noop
